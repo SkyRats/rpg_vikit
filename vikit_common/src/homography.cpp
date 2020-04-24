@@ -12,6 +12,7 @@
 #include <vikit/homography.h>
 #include <opencv2/opencv.hpp>
 #include <stdio.h>
+#include "opencv2/calib3d/calib3d.hpp"
 
 namespace vk {
 
@@ -45,7 +46,7 @@ calcFromMatches()
   }
 
   // TODO: replace this function to remove dependency from opencv!
-  cv::Mat cvH = cv::findHomography(src_pts, dst_pts, CV_RANSAC, 2./error_multiplier2);
+  cv::Mat cvH = cv::findHomography(src_pts, dst_pts, 8, 2./error_multiplier2);
   H_c2_from_c1(0,0) = cvH.at<double>(0,0);
   H_c2_from_c1(0,1) = cvH.at<double>(0,1);
   H_c2_from_c1(0,2) = cvH.at<double>(0,2);
